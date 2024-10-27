@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handlebars.js Example</title>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.min.js"></script>
+</head>
+<body>
+
+  <!-- Handlebars Template -->
+  <script id="template" type="text/x-handlebars-template">
+    <h1>Welcome, {{user.name}}!</h1>
+
+    <!-- If/Else Condition -->
+    {{#if user.isMember}}
+      <p>Thank you for being a loyal member, {{user.name}}!</p>
+    {{else}}
+      <p>Hello, {{user.name}}! Join us today for exclusive benefits!</p>
+    {{/if}}
+
+    <!-- Loop over an Array of Items -->
+    <h2>Your Orders:</h2>
+    <ul>
+      {{#each orders}}
+        <li>Order #{{id}}: {{item}} - {{quantity}} pcs @ ${{price}} each
+          <!-- Nested If Condition -->
+          {{#if isDiscounted}}
+            <strong>(Discount Applied)</strong>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+
+    <!-- Variable Output and Calculation -->
+    <p>Total Orders: {{orders.length}}</p>
+    <p>Total Cost: ${{totalCost}}</p>
+  </script>
+
+
+  <div id="output"></div>
+
+  <script>
+
+    const context = {
+      user: {
+        name: 'Kourosh',
+        isMember: true 
+      },
+      orders: [
+        { id: 1, item: 'Laptop', quantity: 1, price: 1000, isDiscounted: true },
+        { id: 2, item: 'Mouse', quantity: 2, price: 25, isDiscounted: false },
+        { id: 3, item: 'Keyboard', quantity: 1, price: 50, isDiscounted: true }
+      ],
+      totalCost: function() {
+        return this.orders.reduce((sum, order) => sum + (order.quantity * order.price), 0);
+      }
+    };
+
+    const templateSource = document.getElementById("template").innerHTML;
+    const template = Handlebars.compile(templateSource);
+    const renderedHtml = template(context);
+    document.getElementById("output").innerHTML = renderedHtml;
+  </script>
+
+</body>
+</html>
