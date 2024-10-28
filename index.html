@@ -5,10 +5,23 @@
         <title>CKEditor 5 Framework – Implementing an inline widget</title>
       <script type="module" crossorigin src="/assets/index-DhUvW5e0.js"></script>
       <link rel="stylesheet" crossorigin href="/assets/index-CPSBpcAx.css">
+    <style>
+
+.placeholder {
+    background-color: #EEE !important;
+    padding: 0px 3px !important;
+    margin: 0px 5px !important;
+    border: solid 1px #CCC;
+    line-height: 24px !important;
+    border-radius: 5px !important;
+}
+ 
+ </style>
+    
     </head>
     <body>
         <div id="editor">
-            <p>Editor content goes here.</p>
+            <p>Hi  <span class="placeholder ck-widget ck-widget_selected" contenteditable="false" draggable="true">{color}</span> Editor content goes here.  <span class="placeholder ck-widget ck-widget_selected" contenteditable="false">{first name}</span> </p>
         </div>
 
     </body>
